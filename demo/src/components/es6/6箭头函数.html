@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const arr = [1, 3, 2, 4, 6, 5, 6]
+        const a = arr.filter(function (tem) {
+            if (tem % 2 === 0) {
+                return true
+            }
+        })
+        console.log(a);
+        const b = arr.filter(item=>item%2===0)
+        console.log(b);
+        // 箭头函数适合于this无关的的回调，定时器，数组发方法回调。
+    </script>
+</body>
+
+</html>

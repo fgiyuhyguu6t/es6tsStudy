@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+</head>
+<body>
+    <script>
+        const p = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                // let data = '正确';
+                // resolve(data)//正确
+
+                let err = '错误'
+                reject(err)//错误时
+            }, 1000);
+        })
+        // 正确时调用then 
+        p.then(function (va) {
+            console.log(va)
+        }, function (reason) {
+            console.log(reason);
+        })
+
+        // 创建一个 Promise 对象
+        var myPromise = new Promise(function (resolve, reject) {
+            // 异步操作
+            setTimeout(function () {
+                var randomNum = Math.random();
+                console.log("randomNum",randomNum);
+                if (randomNum > 0.5) {
+                    resolve(randomNum);
+                } else {
+                    reject("Error: Random number is less than 0.5");
+                }
+            }, 1000);
+        });
+
+        // 处理 Promise 的结果
+        myPromise.then(function (result) {
+            console.log("Success: " + result);
+        }).catch(function (error) {
+            console.log("Failure: " + error);
+        });
+    </script>
+</body>
+
+</html>

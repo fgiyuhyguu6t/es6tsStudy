@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="glMatrix-0.9.6.min.js"></script>
+    <script>
+        let vertexstring = `
+        attribute vec3 a_position;
+        uniform  mat4  proj;
+        void main(void){
+            gl_Position = proj*vec4(a_position,1.0)  ;
+            gl_PointSize=60.0;
+        }
+        `;
+        let fragmentstring = `
+        precision mediump float;
+        void main(void){
+          gl_FragColor = vec4(0.0,0.0,1.0,1.0);
+        }
+        `;
+        var projMat4 = mat4.create();
+        var webgl;
+        function init() {
+            initWebgl();
+            initShader();
+            initBuffer();
+            draw();
+        }
+        function initWebgl() {
+            let webglDiv = document.getElementById('myCanvas');
+            webgl = webglDiv.getContext("webgl");
+            webgl.viewport(0, 0, webglDiv.clientWidth, webglDiv.clientHeight);
+            mat4.ortho(0, webglDiv.clientWidth, webglDiv.clientHeight, 0, -1.0, 1.0, projMat4)
+        }
+        // shader创建
+        function initShader() {
+            // 创建shader
+            let vsshader = webgl.createShader(webgl.VERTEX_SHADER);
+            let fsshader = webgl.createShader(webgl.FRAGMENT_SHADER);
+            // 绑定shader
+            webgl.shaderSource(vsshader, vertexstring);
+            webgl.shaderSource(fsshader, fragmentstring);
+            // 编译shader
+            webgl.compileShader(vsshader);
+            webgl.compileShader(fsshader);
+            // 语法错误检查
+            if (!webgl.getShaderParameter(vsshader, webgl.COMPILE_STATUS)) {
+                var err = webgl.getShaderInfoLog(vsshader);
+                alert(err);
+                return;
+            }
+            if (!webgl.getShaderParameter(fsshader, webgl.COMPILE_STATUS)) {
+                var err = webgl.getShaderInfoLog(fsshader);
+                alert(err);
+                return;
+            }
+            // 编译完的shader
+            let program = webgl.createProgram();
+            // shader绑定到编译完的程序
+            webgl.attachShader(program, vsshader);
+            webgl.attachShader(program, fsshader)
+            // 连接程序对象（检查）
+            webgl.linkProgram(program);
+            // shader连接给GPU
+            webgl.useProgram(program);
+            webgl.program = program
+        }
+        var points = [];
+        var colors=[];
+        function initBuffer() {
+            let aPsotion = webgl.getAttribLocation(webgl.program, "a_position");//shader->js
+            let arr = [100.0,100.0,0, 200.0,200.0,0, 300.0,200.0,0 ,400,600,0];
+            let vertexArr = new Float32Array(arr);
+            let trangleBuffer =  webgl.createBuffer();
+            webgl.bindBuffer(webgl.ARRAY_BUFFER,trangleBuffer);
+            webgl.bufferData(webgl.ARRAY_BUFFER,vertexArr,webgl.STATIC_DRAW);
+            webgl.enableVertexAttribArray(aPsotion);
+            webgl.vertexAttribPointer(aPsotion,3, webgl.FLOAT, false, 0, 0);
+
+            let uniformProj = webgl.getUniformLocation(webgl.program, "proj");
+            webgl.uniformMatrix4fv(uniformProj, false, projMat4);
+        }
+        // 绘制
+        function draw() {
+            webgl.clearColor(0.0, 0.0, 0.0, 1.0);//面板颜色
+            webgl.clear(webgl.COLOR_BUFFER_BIT | webgl.DEPTH_BUFFER_BIT);//把上一条代码上报。
+            // 绘制线
+            // webgl.drawArrays(webgl.LINES,0,4);
+            webgl.drawArrays(webgl.LINE_STRIP,0,4)//顶点绘制（绘制什么，从第0个索引开始，绘制几个）
+            //webgl.drawArrays(webgl.LINE_LOOP,0,4)
+            // webgl.drawElements()//索引绘制
+            
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <canvas id='myCanvas' width="1024" height='700'></canvas>
+</body>
+
+</html>

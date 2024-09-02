@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SET实践</title>
+</head>
+<body>
+    <script>
+        let arr =[1,1,3,5,9,6,7,4,3,2,5,3,5,67,1]
+        // 去重
+        let a=new Set(arr)
+        let aa=[...new Set(arr)]
+        console.log(a);
+        console.log(aa);
+        // 交集
+        let b=[4,5,6,4,7,5,2]
+        let j= [...new Set(arr)].filter(item=>{
+            let bq= new Set(b)
+            if(bq.has(item)){
+                return true
+            }else{
+                return false
+            }
+        })
+        console.log(j);
+
+        let jiaoji=[...new Set(arr)].filter(item=>new Set(b).has(item))
+        console.log(jiaoji);
+
+        // 并集
+        let union=[... new Set([...arr,...b])]  //合并并去重
+        console.log(union);
+
+        // 差集
+        let chaji=[...new Set(arr)].filter(item=>!(new Set(b).has(item)))
+        console.log(chaji);
+    </script>
+</body>
+</html>

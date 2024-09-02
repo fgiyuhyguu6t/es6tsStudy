@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>get </title>
+</head>
+<body>
+    <script>
+        class p{
+            get price(){
+                console.log('jiage');
+                return "返回"
+            }
+            set price(newv){
+                console.log("修改");
+                console.log("newv:修改后的值",newv);
+                return newv
+
+            }
+        }
+        let s =new p()
+        console.log(s.price);
+        s.price='把price改掉'
+        console.log("修改后：",s.price);
+    </script>
+    
+</body>
+</html>

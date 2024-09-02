@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>asyns</title>
+    <h1>async await</h1>
+</head>
+<body>
+    <script>
+        // 返回值为 Promise
+        async function fn(){
+            // 返回非Promise，返回的就是Promise的成功对象
+            return "ffff"
+        }
+        console.log(fn());
+    </script>
+</body>
+</html>

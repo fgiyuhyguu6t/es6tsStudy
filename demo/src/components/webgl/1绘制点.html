@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./glMatrix-0.9.6.min.js"></script>
+    <script>
+        var webgl; // 声明全局变量
+        var projMat4 = mat4.create(); // 初始化一个4*4的矩阵
+        var vertexString = `
+        attribute vec4 a_position;
+        uniform mat4 proj;//承接投影
+        void main(){
+            gl_Position =proj * a_position;
+            gl_PointSize = 60.0;
+        }
+        `;
+      var fragmentString = `
+        void main(){
+            gl_FragColor = vec4(0,0,1.0,1.0);
+        }
+        `; // 片元着色器
+
+        // 入口函数
+        function init() {
+            initWebgl();
+            initShader();
+            initBuffer();
+            draw();
+        }
+        // webgl初始化函数
+        function initWebgl() {
+            // 获取canvas容器
+            let webglDiv = document.querySelector("#webglCanvas");
+            // 设置webgl上下文
+            webgl = webglDiv.getContext("webgl");
+            // 设置可视范围 https://developer.mozilla.org/zh-CN/docs/Web/API/WebGLRenderingContext/viewport
+            webgl.viewport(0, 0, webglDiv.width, webglDiv.height);
+            mat4.ortho(0,webglDiv.clientWidth,webglDiv.clientHeight,0,-1,1,projMath4);
+        }
+        // shder初始化函数
+        function initShader() { 
+            let vsshader=webgl.createShader(webgl.VERIEX_SHADER);
+            let fsshader=webgl.createShader(webgl.FRAGENT_SHADER);
+
+            webgl.shaderSource(vsshader,vertexString);
+            webgl.shaderSource(vsshader,fragmentString);
+            
+            webgl.compileShader(vsshader);
+            webgl.compileShader(fsshader);
+            let program =webgl.createProgram();
+            webgl.attachShader(program,vsshader);
+            webgl.attachShader(program,fsshader);
+            webgl.linkProgram(program)
+            webgl.useProgram(program);
+            webgl.program=program;
+        }
+        // 数据缓冲区初始化函数
+        function initBuffer() {
+            let pointPosition=new Float32Array([100.0,100.0,0.0,1.0]);
+            let aPosition=webgl.getAttribLocation(webgl.program,'a_position');
+            webgl.vertexAttrib4fv(aPosition,pointPosition);
+            let uniformproj=webgl.getUniformLocation(webgl.program,'proj');
+            webgl.uniformMatrix4fv(uniformproj,false,projMath4);
+        }
+        // webgl的绘制函数
+        function draw() {
+            webgl.clearColor(0.,0.,0.,1.);
+            webgl.clear(webgl.COLOR_BUFFER_BIT);
+            webgl.drawArrays(webgl.POINTS,0,1);
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <canvas id="webglCanvas" width="500" height="500"></canvas>
+</body>
+
+</html>

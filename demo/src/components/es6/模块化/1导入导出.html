@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="module">
+        // 1.通用导入方式
+        // import *as aa from './1daochu.js'
+
+        // 别名使用 .属性
+
+        // console.log(aa.sclool);
+        // // console.log(aa.sclool);
+        // // console.log(aa.sclool1);
+        // // console.log(aa.name);
+        // console.log(aa);
+        // // console.log(aa);
+        // // 使用暴露方法
+        // aa.default.change()
+        // aa.change() //no
+        // aa.jj()
+
+
+        // 2.解构赋值方法导入 //只导入这两
+        // import { sclool, sclool1 as two } from './1daochu.js'
+
+        // // 然后直接使用，不需要整别名
+        // console.log(sclool);
+        // // 取了别名直接用别名
+        // console.log(two);
+
+        // 3.简便方法 针对默认暴露
+        import m3 from './1daochu.js'
+
+        console.log(m3);
+        console.log(m3.name);
+        // 使用
+        m3.change()
+
+
+
+    </script>
+</body>
+
+</html>

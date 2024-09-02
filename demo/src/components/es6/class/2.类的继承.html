@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>es5对象继承</title>
+</head>
+<body>
+    <script>
+        function phone(brand,price){
+            this.brand=brand
+            this.price=price
+        }
+        // 父级够着函数
+        phone.prototype.call=function(){
+            console.log('可以打电话');  
+        }
+
+
+// 子集
+        function saphone(brand,price,color,size){
+            // call 改变this  指向saphone
+            phone.call(this,brand,price)
+            this.color=color
+            this.size=size
+        }
+        // 子集构造函数原型
+        saphone.prototype=new phone;
+        saphone.prototype.constructor=saphone
+        saphone.prototype,photo=function(){
+            console.log("我可以拍照");  
+        }
+        saphone.prototype.playgame=function(){
+            console.log("game");
+        }
+        const sz=new saphone('szzz',2499,'red',5.5)
+        console.log(sz);
+        
+
+    </script>
+</body>
+</html>

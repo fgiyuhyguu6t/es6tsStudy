@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function ade(){
+            console.log(arguments);
+        }
+        ade('hhh','ccc')
+        // rest参数  放最后一个
+        function ddd(...ar){
+            console.log(ar); //是一个数组可以使用 filter some every map
+        }
+        ddd('1','2','3')
+    </script>
+</body>
+</html>

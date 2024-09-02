@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>集合</title>
+</head>
+<body>
+    <script>
+        // 成员值是唯一的
+        let s =new Set()
+        let s1 =new Set(['大事','好事','小事','小事'])
+        s1.add('坏事')  //添加
+        console.log("s1",s1);
+        s1.delete('大事')  //删除
+        console.log("s1",s1);
+       const a= s1.has('小事')   //has 检查
+        console.log(a);
+    console.log(s1.size);  //长度
+    </script>
+</body>
+</html>

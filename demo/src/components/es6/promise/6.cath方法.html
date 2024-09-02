@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cath</title>
+</head>
+
+<body>
+    <script>
+        const p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject('cu')
+            }, 1000)
+        })
+        // p.then(v=>{},reason=>{
+        //     console.error(reason)
+        // })
+        p.catch(reason => {
+            // 错误
+            // console.error(reason)
+            // 警告
+            console.warn(reason)
+        })
+    </script>
+</body>
+
+</html>

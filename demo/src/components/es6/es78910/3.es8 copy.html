@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>await</title>
+</head>
+<body>
+    <script>
+        // 创建promise
+        const p = new Promise((resolve,reject)=>{
+            // resolve('成功')
+            reject('失败')
+        })
+
+// await要放async里面
+        async function fn(){
+            // 成功
+            try{
+
+                let result =await p
+                console.log(result);
+                //失败
+            }catch(e){
+                console.log(e);
+            }
+        }
+        // console.log(fn());
+        fn()
+    </script>
+</body>
+</html>

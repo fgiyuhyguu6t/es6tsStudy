@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAP </title>
+</head>
+<body>
+    <script>
+        // 键值对
+        let m =new Map()
+        m.set('name','校长')
+        m.set('change',function(){
+            console.log("kkk");
+        })
+        m.delete('name')
+        // 获取
+        let a= m.get('change')
+        console.log(m);
+        console.log(a);
+        // 清空
+        // m.clear()
+        console.log(m);
+        for(let v of m){
+            console.log(v);
+        }
+    </script>
+    
+</body>
+</html> 

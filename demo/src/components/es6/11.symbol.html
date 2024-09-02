@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>symbol</title>
+</head>
+<body>
+    <script>
+        // symbol
+        // 唯一的。不能运算
+        let a=Symbol('777')
+        let a2=Symbol('777')
+        a+a2
+        // 不等
+        // Symbol.for
+        let s3=Symbol.for('g')
+        let s4=Symbol.for('g')
+        // 相等
+
+        let yx={
+            name:'lrc',
+            [Symbol('say')]:function(){
+                console.log('jianghua');
+            }
+        }
+        </script>
+</body>
+</html>

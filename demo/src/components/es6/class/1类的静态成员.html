@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 函数
+        function p(){
+
+        }
+        p.name="手机"
+        p.change=function(){
+            console.log('方法');
+        }
+        const no=new p
+        console.log(no.name);
+        no.change
+
+
+        class pp{
+           static name1='hhh'
+           static change(){
+            console.log('静态方法');
+           }
+           change1(){
+            console.log("我不是静态方法");
+           }
+        }
+
+        let psl =new pp()
+        console.log(psl.name1);
+        console.log(pp.name1);
+        // psl.change()  /静态方法只有类之间可以用
+        pp.change()
+        psl.change1()
+
+
+
+    </script>
+</body>
+</html>

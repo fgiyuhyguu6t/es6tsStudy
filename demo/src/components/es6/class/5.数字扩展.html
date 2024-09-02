@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字扩展</title>
+</head>
+<body>
+    <script>
+        console.log(0.1+0.2);
+
+    function aa(a,b){
+        // 绝对值abs
+        // Number.EPSILON 正常误差
+
+            if(Math.abs(a-b)< Number.EPSILON){
+                return true
+            }
+        }
+        console.log(aa(0.1+0.2,0.3)); 
+
+        let er=0b110
+        let ba=0o237
+        let shi=100
+        let shiliu=0x349f
+
+        Number.isFinite //检测有限数
+
+        // 截取
+        console.log(Number.parseInt('46789dsadf'))
+
+
+
+
+
+    </script>
+</body>
+</html>
